@@ -16,10 +16,11 @@ namespace LongestMatchedWord.Controllers
         {
             List<string> matchingWords = new List<string>();
             Word word = new Word();
+            string path = System.Web.HttpContext.Current.Request.MapPath("~\\NET Test 00.txt");
 
-            if (File.Exists("C:\\NET Test 00.txt"))
+            if (File.Exists(path))
             {
-                var wordsFromFile = File.ReadAllLines("C:\\NET Test 00.txt").ToList().OrderByDescending(x => x.Length).ToList();
+                var wordsFromFile = File.ReadAllLines(path).ToList().OrderByDescending(x => x.Length).ToList();
                 if (!(wordsFromFile == null))
                 {
                     matchingWords = MatchedWord.GetLongestWords(wordsFromFile).OrderByDescending(x => x.Length).ToList();
