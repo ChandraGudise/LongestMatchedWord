@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Longest Words and Count</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: 'http://localhost:62208//api/LongestWord',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('ul#wordsList').empty();
+                        $('ul#countDiv').html('');
+                        $.each(data.words, function (key) {
+                            $('ul#wordsList').append($('<li />').append(data.words[key]));
+                        });
+                        $('div#countDiv').html('Matching Count: ' + data.count);
+                    },
+                    error: function () {
+                        alert('Error');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <button>Get Longest words</button>
+    <br />
+    <div>
+        <ul id="wordsList"></ul>
+        <br />
+        <div id="countDiv"></div>
+    </div>
+</body>
+</html>
